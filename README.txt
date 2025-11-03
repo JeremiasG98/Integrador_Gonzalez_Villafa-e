@@ -125,18 +125,19 @@ Response: 201 Created, body -> TaskResponse
 
 Team 3 (Create, ChangeState & GetByID)
 #### Required use cases:
-CreateProject
-CreateTask (under a project) — must verify project exists and is not CLOSED
-CloseProject / ChangeProjectStatus (PLANNED→ACTIVE→CLOSED)
-ChangeTaskState (e.g., TODO→IN_PROGRESS→DONE); when set to DONE, set finishedAt
-GetProjectById
-GetTaskById
+- CreateProject
+- CreateTask (under a project) — must verify project exists and is not CLOSED
+- CloseProject / ChangeProjectStatus (PLANNED→ACTIVE→CLOSED)
+- ChangeTaskState (e.g., TODO→IN_PROGRESS→DONE); when set to DONE, set finishedAt
+- GetProjectById
+- GetTaskById
 #### Endpoints:
-POST /projects
-POST /projects/{projectId}/tasks
-POST /projects/{projectId}/status (body: { "status": "CLOSED" })
-POST /projects/{projectId}/tasks/{taskId}/status (body: { "status": "DONE" })
-GET /projects/{projectId}
-GET /projects/{projectId}/tasks/{taskId}
+- POST /projects
+- POST /projects/{projectId}/tasks
+- POST /projects/{projectId}/status (body: { "status": "CLOSED" })
+- POST /projects/{projectId}/tasks/{taskId}/status (body: { "status": "DONE" })
+- GET /projects/{projectId}
+- GET /projects/{projectId}/tasks/{taskId}
+
 
 
