@@ -2,53 +2,60 @@ package domain.model;
 
 import domain.exception.FieldNotNullException;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
-@Getter @Setter
+@Getter
 public class Task {
     private Long id;
-    private Project project;
+    private Project project; // referencia al proyecto
     private String title;
-    private Integer estimatedHours;
-    private String assignee;
+    private Integer estimateHours;
+    private String assignee;  // nullable
     private TaskStatus status;
-    private LocalDateTime finishedAt;
+    private LocalDateTime finishedAt; // nullable
     private LocalDateTime createdAt;
 
 
-    private Task(Long id, Project project, String title, Integer estimatedHours, String assignee, TaskStatus status, LocalDateTime finishedAt, LocalDateTime createdAt) {
-        if(project == null){
-            throw new FieldNotNullException("Project cannot be null");
-        }
-        if(title == null || title.isBlank()){
-            throw new FieldNotNullException("Title cannot be null or empty");
-        }
-        if(estimatedHours == null){
-            throw new FieldNotNullException("Estimated hours cannot be null");
-        }
-        if(status == null){
-            throw new FieldNotNullException("Status cannot be null");
-        }
-        if(createdAt == null) {
-            throw new FieldNotNullException("Created at cannot be null");
-        }
-
+    private Task(Long id, Project project, String title, Integer estimateHours, String assignee, TaskStatus status, LocalDateTime finishedAt, LocalDateTime createdAt) {
         this.id = id;
         this.project = project;
         this.title = title;
-        this.estimatedHours = estimatedHours;
+        this.estimateHours = estimateHours;
         this.assignee = assignee;
         this.status = status;
         this.finishedAt = finishedAt;
         this.createdAt = createdAt;
     }
 
-    public static Task createInstance(Long id, Project project, String title, Integer estimatedHours, String assignee, TaskStatus status, LocalDateTime finishedAt, LocalDateTime createdAt){
-        return new Task(id, project, title, estimatedHours, assignee, status, finishedAt, createdAt);
+    public static Task createInstance(Long id, Project project, String title, Integer estimateHours, String assignee, TaskStatus status, LocalDateTime finishedAt, LocalDateTime createdAt){
+        Objects.requireNonNull(project, "projectId es requerido");
+        Objects.requireNonNull(title, "title es requerido");
+        Objects.requireNonNull(estimateHours, "estimateHours es requerido");
+        Objects.requireNonNull(status, "status es requerido");
+        Objects.requireNonNull(createdAt, "createdAt es requerido");
+
+        if (title.isBlank()) throw new IllegalArgumentException("title no puede estar vacío");
+        if (estimateHours < 0) throw new IllegalArgumentException("estimateHours no puede ser negativo");
+        return new Task(id, project, title, estimateHours, assignee, status, finishedAt, createdAt);
     }
 
+    // Cuando se marca como DONE
+    public Task markDone(LocalDateTime finishedAt) {
+        if (finishedAt == null) throw new IllegalArgumentException("finishedAt es requerido");
+        return new Task(this.id, this.project, this.title, this.estimateHours, this.assignee, TaskStatus.DONE, finishedAt, this.createdAt);
+    }
+
+    // getters
+    public Long getId(){return id; }
+    public Project getProjectId() { return project; }
+    public String getTitle() { return title; }
+    public Integer getEstimateHours() { return estimateHours; }
+    public String getAssignee() { return assignee; }
+    public TaskStatus getStatus() { return status; }
+    public LocalDateTime getFinishedAt() { return finishedAt; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
 
 
 }
