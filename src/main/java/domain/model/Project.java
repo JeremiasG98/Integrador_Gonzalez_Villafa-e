@@ -29,6 +29,9 @@ public class Project {
         if(status == null){
             throw new FieldNotNullException("Status cannot be null");
         }
+        if (endDate.isBefore(startDate)) {
+            throw new EndDateBeforeStartDateException("End date cannot be before start date");
+        }
 
 
         this.id = id;
