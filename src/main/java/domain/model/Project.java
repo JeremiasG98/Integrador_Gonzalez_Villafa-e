@@ -1,49 +1,87 @@
 package domain.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import domain.exception.BusinessRuleViolationException;
+import domain.exception.ValidationException;
+import domain.model.ProjectStatus;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
-@Getter
 public class Project {
+
     private Long id;
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
     private ProjectStatus status;
-    private String description;
-    private final List<Long> taskIds; // almacenar ids de tareas (desacopla persistencia) | ***Esto habria que meditarlo***
 
-    private Project(Long id, String name, LocalDate startDate, LocalDate endDate, ProjectStatus status, String description, List<Long> taskIds){
+    private Project(Long id, String name, LocalDate startDate, LocalDate endDate, ProjectStatus status) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
-        this.description = description;
-        this.taskIds = new ArrayList<>(taskIds);
     }
 
-    public static Project createInstance(Long id, String name, LocalDate startDate, LocalDate endDate, ProjectStatus status, String description){
-        Objects.requireNonNull(name, "name es requerido");
-        Objects.requireNonNull(startDate, "startDate es requerido");
-        Objects.requireNonNull(endDate, "endDate es requerido");
-        Objects.requireNonNull(status, "status es requerido");
+    public static Project create(Long id, String name, LocalDate startDate, LocalDate endDate) {
+        Objects.requireNonNull(name, "Project name es requerido");
+        Objects.requireNonNull(startDate, "Project startDate es requerida");
+        Objects.requireNonNull(endDate, "Project endDate es requerida");
 
-        if (name.isBlank()) throw new IllegalArgumentException("El nombre del proyecto no puede estar vacío"); //Aca habria que hacer las exceptions correspondientes
-        if (endDate.isBefore(startDate)) throw new IllegalArgumentException("endDate no puede ser anterior a startDate"); //aca igual obviamente
-        return new Project(id, name, startDate, endDate, status, description,  Collections.emptyList());
+        if (name.isBlank()) {
+            throw new ValidationException("Project name no puede estar vacío");
+        }
+        if (endDate.isBefore(startDate)) {
+            throw new ValidationException("Project endDate debe ser mayor o igual a startDate");
+        }
+        if (endDate.isBefore(LocalDate.now())) {
+            throw new ValidationException("Project endDate debe ser mayor o igual a la fecha actual al crearse");
+        }
+
+        // Un proyecto nuevo siempre inicia en PLANNED
+        return new Project(id, name, startDate, endDate, ProjectStatus.PLANNED);
     }
 
-    // helpers para asociación local
-    public Project withAddedTask(Long taskId) {
-        List<Long> copy = new ArrayList<>(this.taskIds);
-        copy.add(taskId);
-        return new Project(this.id, this.name, this.startDate, this.endDate, this.status, this.description, copy);
+    // Getters...
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public ProjectStatus getStatus() {
+        return status;
+    }
+
+    // Método para transicionar el estado del proyecto
+    public void changeStatus(ProjectStatus newStatus) {
+        if (this.status == newStatus) return; // No cambia si es el mismo
+
+        switch (this.status) {
+            case PLANNED:
+                // PLANNED puede ir a ACTIVE o CLOSED
+                this.status = newStatus;
+                break;
+            case ACTIVE:
+                // ACTIVE puede ir a CLOSED
+                if (newStatus == ProjectStatus.PLANNED) {
+                    throw new BusinessRuleViolationException("No se puede volver de ACTIVE a PLANNED");
+                }
+                this.status = newStatus;
+                break;
+            case CLOSED:
+                // CLOSED no puede cambiar
+                throw new BusinessRuleViolationException("Un proyecto CLOSED no puede cambiar de estado");
+        }
     }
 }

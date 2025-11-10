@@ -10,4 +10,5 @@ public interface ITaskRepository {
     Optional<Task> findById(Long id);
     List<Task> findByProjectId(Long projectId);
     void deleteById(Long id);
+    void updateTask(Task task);
 }
