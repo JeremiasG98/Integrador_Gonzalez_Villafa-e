@@ -37,9 +37,7 @@ public class Project {
         if (endDate.isBefore(LocalDate.now())) {
             throw new ValidationException("Project endDate debe ser mayor o igual a la fecha actual al crearse");
         }
-        if (endDate.isBefore(startDate)) {
-            throw new EndDateBeforeStartDateException("End date cannot be before start date");
-        }
+
 
         // Un proyecto nuevo siempre inicia en PLANNED
         return new Project(id, name, startDate, endDate, ProjectStatus.PLANNED);
