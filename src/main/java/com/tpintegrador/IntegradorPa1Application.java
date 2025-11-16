@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import java.util.TimeZone;
 
 @SpringBootApplication
-@EntityScan(basePackages = {"infrastructure.persistence.entity"})
+@EntityScan(basePackages = {"com.tpintegrador.adapter.infrastructure.persistence.entity"})
 public class IntegradorPa1Application {
 
 	public static void main(String[] args) {
