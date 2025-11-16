@@ -1,14 +1,14 @@
 package com.tpintegrador.usecase;
 
-import domain.exception.BusinessRuleViolationException;
-import domain.exception.ResourceNotFoundException;
-import domain.model.Project;
-import domain.model.ProjectStatus;
-import domain.model.Task;
-import domain.model.TaskStatus;
-import domain.output.IProjectRepository;
-import domain.output.ITaskRepository;
-import domain.usecase.CreateTaskUseCase;
+import com.tpintegrador.domain.exception.BusinessRuleViolationException;
+import com.tpintegrador.domain.exception.ResourceNotFoundException;
+import com.tpintegrador.domain.model.Project;
+import com.tpintegrador.domain.model.ProjectStatus;
+import com.tpintegrador.domain.model.Task;
+import com.tpintegrador.domain.model.TaskStatus;
+import com.tpintegrador.domain.output.IProjectRepository;
+import com.tpintegrador.domain.output.ITaskRepository;
+import com.tpintegrador.domain.usecase.CreateTaskUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
