@@ -63,7 +63,7 @@ public class Project {
         return status;
     }
 
-    // Método para transicionar el estado del proyecto
+    // Metodo para transicionar el estado del proyecto
     public void changeStatus(ProjectStatus newStatus) {
         if (this.status == newStatus) return; // No cambia si es el mismo
 

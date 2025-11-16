@@ -4,7 +4,9 @@ import com.tpintegrador.domain.model.Project;
 import com.tpintegrador.domain.model.Task;
 import com.tpintegrador.adapter.infrastructure.persistence.entity.ProjectEntity;
 import com.tpintegrador.adapter.infrastructure.persistence.entity.TaskEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PersistenceMapper {
 
     public ProjectEntity toEntity(Project project){
