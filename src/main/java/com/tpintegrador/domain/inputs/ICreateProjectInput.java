@@ -4,5 +4,5 @@ import com.tpintegrador.domain.model.ProjectStatus;
 import java.time.LocalDate;
 
 public interface ICreateProjectInput {
-    Long createProject(String name, LocalDate startDate, LocalDate endDate, ProjectStatus status);
+    Long createProject(String name, LocalDate startDate, LocalDate endDate);
 }

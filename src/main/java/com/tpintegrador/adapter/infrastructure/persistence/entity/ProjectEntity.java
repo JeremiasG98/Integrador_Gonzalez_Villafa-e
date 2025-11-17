@@ -16,7 +16,7 @@ import java.util.List;
 public class ProjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "name",nullable = false,unique = true)
     private String name;

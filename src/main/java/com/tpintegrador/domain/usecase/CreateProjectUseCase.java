@@ -16,7 +16,7 @@ public class CreateProjectUseCase implements ICreateProjectInput {
     }
 
     @Override
-    public Long createProject(String name, LocalDate startDate, LocalDate endDate, ProjectStatus status) {
+    public Long createProject(String name, LocalDate startDate, LocalDate endDate) {
         // Validación de campos requeridos y reglas de fecha se manejan en Project.create()
 
         // Regla: Project.name must be unique.

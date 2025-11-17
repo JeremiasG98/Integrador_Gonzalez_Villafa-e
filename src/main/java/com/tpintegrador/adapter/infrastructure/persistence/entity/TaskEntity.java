@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class TaskEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "title",nullable = false)
     private String title;
@@ -34,7 +34,7 @@ public class TaskEntity {
     @Column(name = "createdat",nullable = false)
     private LocalDateTime createdAt;
 
-    //Muchas tareas tienen un solo proyecto
+    //Mchas tareas tienen un solo proyecto
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
     private ProjectEntity project;

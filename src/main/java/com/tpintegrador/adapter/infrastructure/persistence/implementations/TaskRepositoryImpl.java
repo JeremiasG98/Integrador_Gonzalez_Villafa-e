@@ -22,7 +22,7 @@ public class TaskRepositoryImpl implements ITaskRepository {
     private IProjectJpaRepository projectJpaRepository;
     private PersistenceMapper mapper;
 
-    public TaskRepositoryImpl(ITaskJpaRepository taskJpaRepository, PersistenceMapper mapper) {
+    public TaskRepositoryImpl(ITaskJpaRepository taskJpaRepository, IProjectJpaRepository projectJpaRepository, PersistenceMapper mapper) {
         this.taskJpaRepository = taskJpaRepository;
         this.projectJpaRepository = projectJpaRepository;
         this.mapper = mapper;
