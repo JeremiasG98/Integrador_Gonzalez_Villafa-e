@@ -15,13 +15,8 @@ public class CreateProjectUseCase implements ICreateProjectInput {
         this.projectRepository = projectRepository;
     }
 
-    public Project createProject(Long id, String name, LocalDate start, LocalDate end) {
-        Project p = Project.create(id, name, start, end);
-        return projectRepository.save(p);
-    }
-
     @Override
-    public Long createProject(Long id, String name, LocalDate startDate, LocalDate endDate, ProjectStatus status) {
+    public Long createProject(String name, LocalDate startDate, LocalDate endDate, ProjectStatus status) {
         // Validación de campos requeridos y reglas de fecha se manejan en Project.create()
 
         // Regla: Project.name must be unique.
@@ -29,7 +24,7 @@ public class CreateProjectUseCase implements ICreateProjectInput {
             throw new DuplicateResourceException("Ya existe un proyecto con el nombre: " + name);
         }
 
-        // ID nulo al crear, el repositorio lo asignará.
+        // ID nulo al crear, el repositorio lo asignara
         Project project = Project.create(null, name, startDate, endDate);
 
         return projectRepository.save(project).getId();

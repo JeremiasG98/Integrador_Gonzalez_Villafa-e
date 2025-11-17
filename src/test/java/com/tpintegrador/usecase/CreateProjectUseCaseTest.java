@@ -44,7 +44,7 @@ public class CreateProjectUseCaseTest {
         when(projectRepository.save(any(Project.class))).thenReturn(savedProject);
 
         // Act
-        Long projectId = createProjectUseCase.createProject(null, projectName, startDate, endDate, null);
+        Long projectId = createProjectUseCase.createProject(projectName, startDate, endDate, null);
 
         // Assert
         assertNotNull(projectId);
@@ -66,7 +66,7 @@ public class CreateProjectUseCaseTest {
 
         // Act & Assert
         assertThrows(DuplicateResourceException.class, () -> {
-            createProjectUseCase.createProject(null, projectName, startDate, endDate, null);
+            createProjectUseCase.createProject(projectName, startDate, endDate, null);
         });
 
         verify(projectRepository, times(1)).existsByName(projectName);
