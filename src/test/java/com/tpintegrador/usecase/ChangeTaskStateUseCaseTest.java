@@ -1,11 +1,11 @@
 package com.tpintegrador.usecase;
 
-import domain.exception.ResourceNotFoundException;
-import domain.model.Project;
-import domain.model.Task;
-import domain.model.TaskStatus;
-import domain.output.ITaskRepository;
-import domain.usecase.ChangeTaskStateUseCase;
+import com.tpintegrador.domain.exception.ResourceNotFoundException;
+import com.tpintegrador.domain.model.Project;
+import com.tpintegrador.domain.model.Task;
+import com.tpintegrador.domain.model.TaskStatus;
+import com.tpintegrador.domain.output.ITaskRepository;
+import com.tpintegrador.domain.usecase.ChangeTaskStateUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

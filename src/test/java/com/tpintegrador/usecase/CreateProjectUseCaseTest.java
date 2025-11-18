@@ -1,9 +1,9 @@
 package com.tpintegrador.usecase;
 
-import domain.exception.DuplicateResourceException;
-import domain.model.Project;
-import domain.output.IProjectRepository;
-import domain.usecase.CreateProjectUseCase;
+import com.tpintegrador.domain.exception.DuplicateResourceException;
+import com.tpintegrador.domain.model.Project;
+import com.tpintegrador.domain.output.IProjectRepository;
+import com.tpintegrador.domain.usecase.CreateProjectUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -44,7 +44,7 @@ public class CreateProjectUseCaseTest {
         when(projectRepository.save(any(Project.class))).thenReturn(savedProject);
 
         // Act
-        Long projectId = createProjectUseCase.createProject(null, projectName, startDate, endDate, null);
+        Long projectId = createProjectUseCase.createProject(projectName, startDate, endDate);
 
         // Assert
         assertNotNull(projectId);
@@ -66,7 +66,7 @@ public class CreateProjectUseCaseTest {
 
         // Act & Assert
         assertThrows(DuplicateResourceException.class, () -> {
-            createProjectUseCase.createProject(null, projectName, startDate, endDate, null);
+            createProjectUseCase.createProject(projectName, startDate, endDate);
         });
 
         verify(projectRepository, times(1)).existsByName(projectName);

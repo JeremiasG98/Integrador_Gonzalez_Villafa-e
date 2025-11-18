@@ -1,9 +1,9 @@
 package com.tpintegrador.usecase;
 
-import domain.exception.ResourceNotFoundException;
-import domain.model.Project;
-import domain.output.IProjectRepository;
-import domain.usecase.GetProjectByIdUseCase;
+import com.tpintegrador.domain.exception.ResourceNotFoundException;
+import com.tpintegrador.domain.model.Project;
+import com.tpintegrador.domain.output.IProjectRepository;
+import com.tpintegrador.domain.usecase.GetProjectByIdUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
