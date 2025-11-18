@@ -1,8 +1,8 @@
 package com.tpintegrador.model;
 
-import domain.exception.ValidationException;
-import domain.model.Project;
-import domain.model.ProjectStatus;
+import com.tpintegrador.domain.exception.ValidationException;
+import com.tpintegrador.domain.model.Project;
+import com.tpintegrador.domain.model.ProjectStatus;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

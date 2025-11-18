@@ -1,9 +1,9 @@
 package com.tpintegrador.model;
 
-import domain.exception.ValidationException;
-import domain.model.Project;
-import domain.model.Task;
-import domain.model.TaskStatus;
+import com.tpintegrador.domain.exception.ValidationException;
+import com.tpintegrador.domain.model.Project;
+import com.tpintegrador.domain.model.Task;
+import com.tpintegrador.domain.model.TaskStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
